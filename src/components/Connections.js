@@ -2,10 +2,10 @@ import { useState, useEffect} from 'react'
 import { peerActions } from '../store/peerSlice';
 import { useSelector, useDispatch } from 'react-redux';
 
-const Connections = () => {
+const Connections = ({peer}) => {
 
    
-    const [connections, setConnections] = useState(useSelector(state => state.peers.peers));
+    const connections = useSelector(state => state.peers.peers);
     const [newConnection, setNewConnection] = useState("");
     const dispatch = useDispatch();
 
@@ -14,13 +14,21 @@ const Connections = () => {
         dispatch(peerActions.AddNewPeer(newConnection))
     }
 
+    const ConnectHandler = (id) => {
+        const conn = peer.connect(id)
+        dispatch(peerActions.AddNewConnection(conn))
+    }
+
 
     return(
         <> 
         <ul>
-            {
-                connections.map(c => <li>{c.id}</li>)
-            }
+            {connections.map(c => <li key={c}>
+                <div>
+                    {c}
+                    <button onClick={() => ConnectHandler(c)} >Connect</button>
+                </div>
+            </li>)}
         </ul>
 
         <form onSubmit={onSubmitHandler}>

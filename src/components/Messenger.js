@@ -6,12 +6,12 @@ import { peerActions } from '../store/peerSlice';
 const Messenger = () => {
     const dispatch = useDispatch();
     const [connections, setConnections] = useState(useSelector(state=>state.peers.messages))
-    const [message, setMessage] = useState("");
+    const [message, setMessage] = useState();
     const [peer, setPeer] = useState(useSelector(state=>state.peers.peer.id))
 
       const onSubmitHandler= (e) => {
           e.preventDefault();
-        dispatch(peerActions.AddNewMessage(dispatch(peerActions.AddNewMessage(message))))
+        dispatch(peerActions.AddNewMessage(message))
         connections.forEach(c => c.send(message.concat(":", peer.id)));
     }
 

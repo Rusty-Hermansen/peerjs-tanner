@@ -1,16 +1,16 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useState } from "react";
 
 
 const MessageBoard = () => { 
-    const [peer, setPeer]= useState(useSelector(state => state.peers.peer))
-    const [messages, setMessages]= useState(useSelector(state=>state.peers.messages));
 
+    const messages = useSelector(state=>state.peers.messages);
+    let counter = 0;
 
     return(
         <ul>
         {
-            messages.map(m => <li>{m}</li>)
+            messages.map(m => <li key={counter+=1}>{m}</li>)
         }
     </ul>
 
