@@ -23,7 +23,7 @@ function App() {
 }
 
   const dispatch = useDispatch();
-  const [connections, setConnections]= useState(useSelector(state=>state.peers.connections));
+  const connections = useSelector(state=>state.peers.connections);
   const peer = new Peer(makeid(5))
 
   useEffect(()=> {
@@ -47,7 +47,7 @@ function App() {
     <h1>Peer ID: {peer.id}</h1>
     <Connections peer={peer}/>
     <MessageBoard/>
-    <Messenger/>
+    <Messenger peer={peer}/>
   </div>
   );
 }

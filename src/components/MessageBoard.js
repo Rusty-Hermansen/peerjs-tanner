@@ -4,7 +4,7 @@ import { useState } from "react";
 
 const MessageBoard = () => { 
 
-    const messages = useSelector(state=>state.peers.messages);
+    const messages = useSelector(state => state.peers.messages);
     let counter = 0;
 
     return(

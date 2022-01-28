@@ -3,16 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { peerActions } from '../store/peerSlice';
 
 
-const Messenger = () => {
+const Messenger = ({peer}) => {
     const dispatch = useDispatch();
-    const [connections, setConnections] = useState(useSelector(state=>state.peers.messages))
+    const connections = useSelector(state=>state.peers.messages)
     const [message, setMessage] = useState();
-    const [peer, setPeer] = useState(useSelector(state=>state.peers.peer.id))
 
       const onSubmitHandler= (e) => {
-          e.preventDefault();
+        e.preventDefault();
         dispatch(peerActions.AddNewMessage(message))
-        connections.forEach(c => c.send(message.concat(":", peer.id)));
+        connections.forEach(c => c.send(`${peer.id}: ${message}`));
     }
 
     return(

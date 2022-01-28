@@ -16,7 +16,8 @@ const Connections = ({peer}) => {
 
     const ConnectHandler = (id) => {
         const conn = peer.connect(id)
-        dispatch(peerActions.AddNewConnection(conn))
+        console.log(conn);
+        dispatch(peerActions.AddNewConnection({peer: conn.peer}))
     }
 
 
