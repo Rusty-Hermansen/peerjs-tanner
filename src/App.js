@@ -15,13 +15,16 @@ function App() {
 
   peer.on("connection", (con)=>{
     dispatch(peerActions.AddNewConnection(con))
-  })
-
-  connections.forEach(c => {
+    
+    connections.forEach(c => {
     c.on('data', (message)=>{
       dispatch(peerActions.AddNewMessage(message))
     })
   });
+
+  })
+
+  
 
 
  
