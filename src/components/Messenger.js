@@ -1,17 +1,14 @@
 import {useState} from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { peerActions } from '../store/peerSlice';
+import MessageBoard from './MessageBoard';
 
 
-const Messenger = ({peer}) => {
-    const dispatch = useDispatch();
-    const connections = useSelector(state=>state.peers.messages)
+const Messenger = (props) => {
     const [message, setMessage] = useState();
 
       const onSubmitHandler= (e) => {
         e.preventDefault();
-        dispatch(peerActions.AddNewMessage(message))
-        connections.forEach(c => c.send(`${peer.id}: ${message}`));
+        props.SetMessages([...props.messages, message])
+        props.connections.forEach(c => c.send(`${props.peer.id}: ${message}`));
     }
 
     return(
@@ -21,6 +18,8 @@ const Messenger = ({peer}) => {
                 <input onChange={(e)=> setMessage(e.target.value)} type="text"/>
                 <button type="submit">Send Message!</button>
             </form>
+            <MessageBoard messages={props.messages}/>
+            
         </div>
     )
 }

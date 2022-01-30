@@ -16,8 +16,6 @@ const peerSlice = createSlice({
             console.log(state.peers)
         },
         AddNewConnection(state, action){
-            
-
             state.connections=[...state.connections, action.payload.peer]
             console.log(state.connections)
         },
